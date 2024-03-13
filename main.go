@@ -14,13 +14,22 @@ import (
 func main() {
 	sqlDB := app.InitDatabase("postgres://user:password@localhost:5432/pt-booking?sslmode=disable")
 
-	// Data access
+	/*
+	* Data access
+	*/
+
 	trainerDA := dataaccess.CreateTrainerDA(sqlDB)
 
-	// Services
+	/*
+	* Services
+	*/
+
 	trainerService := services.CreateTrainerService(trainerDA)
 
-	// APIs
+	/*
+	* Apis
+	*/
+
 	trainerApi := apis.CreateTrainerApi(trainerService)
 
 	/*

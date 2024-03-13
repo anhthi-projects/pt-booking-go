@@ -1,6 +1,7 @@
 package app
 
 import (
+	"anhthi-projects/pt-booking-go/app/middlewares"
 	"database/sql"
 
 	"github.com/jackc/pgx/v5"
@@ -31,10 +32,8 @@ func InitServer() *echo.Echo {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
+	e.Use(middlewares.WriteToConsole)
 
 	return e
 }
 
-func InitRouting(*echo.Echo) {
-	
-}
