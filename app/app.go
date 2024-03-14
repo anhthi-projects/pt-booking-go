@@ -1,7 +1,7 @@
 package app
 
 import (
-	"anhthi-projects/pt-booking-go/app/middlewares"
+	"anhthi-projects/pt-booking-go/app/mdw"
 	"database/sql"
 
 	"github.com/jackc/pgx/v5"
@@ -22,7 +22,6 @@ func InitDatabase(connStr string) *bun.DB {
 	config.DefaultQueryExecMode = pgx.QueryExecModeSimpleProtocol
 
 	var sqlDB *sql.DB = stdlib.OpenDB(*config)
-
 	db := bun.NewDB(sqlDB, pgdialect.New())
 	
 	return db
@@ -32,7 +31,7 @@ func InitServer() *echo.Echo {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
-	e.Use(middlewares.WriteToConsole)
+	e.Use(mdw.WriteToConsole)
 
 	return e
 }
