@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  init_db:
+    image: flyway/flyway
+    container_name: pt_booking_init_db
+    volumes:
+      - "./sql:/flyway/sql"
+    command: -url=jdbc:postgresql://postgres/pt-booking-service -user=user -password=password -connectRetries=60 migrate
+    depends_on:
+      - postgres
+    networks:
+      - pt_booking_net
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=pt-booking-service
+    ports:
+      - "5432:5432"
+    volumes:
+      - "pt_booking_db_volume:/var/lib/postgresql/data"
+    networks:
+      - pt_booking_net
+
+networks:
+  pt_booking_net:
+
+volumes:
+  pt_booking_db_volume:

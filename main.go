@@ -12,7 +12,7 @@ import (
 
 
 func main() {
-	sqlDB := app.InitDatabase("postgres://user:password@localhost:5432/pt-booking?sslmode=disable")
+	sqlDB := app.InitDatabase("postgres://user:password@localhost:5432/pt-booking-service?sslmode=disable")
 
 	/*
 	* Data access
@@ -43,7 +43,11 @@ func main() {
 	})
 
 	trainer := server.Group("/trainer");
+	trainer.GET("/all", trainerApi.List)
 	trainer.GET("/:id", trainerApi.Get)
+	trainer.POST("", trainerApi.Create)
+	trainer.PUT("/:id", trainerApi.Update)
+	trainer.DELETE("/:id", trainerApi.Delete)
 
-	server.Logger.Fatal(server.Start("127.0.0.1:3000"))
+	server.Logger.Fatal(server.Start("127.0.0.1:4000"))
 }

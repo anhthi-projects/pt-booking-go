@@ -9,9 +9,9 @@ import (
 type TrainerModel struct {
 	bun.BaseModel 					`bun:"table:trainers"`
 	ID            int 			`bun:"id,pk,autoincrement"`
-	FirstName     string 		`bun:"firstName,notnull"`
-	LastName      string 		`bun:"lastName,notnull"`
-	DateOfBirth   time.Time `bun:"dateOfBirth,notnull"`
+	FirstName     string 		`bun:"first_name,notnull"`
+	LastName      string 		`bun:"last_name,notnull"`
+	DateOfBirth   time.Time `bun:"date_of_birth,notnull"`
 	Level   		  string 		`bun:"level"`
-	YearOfExp		  int 			`bun:"yearOfExp"`
+	YearOfExp		  int 			`bun:"year_of_exp"`
 }
